@@ -1,0 +1,34 @@
+analyze_vibe:
+  description: >
+    Analyze the uploaded image at {image} and provide a concise description of
+    the venue's vibe, focusing on atmosphere, decor, lighting, and style. Keep
+    it short and descriptive.
+  expected_output: >
+    A short natural language summary of the vibe, e.g., "Rustic bar with dim
+    lighting, exposed brick walls, and wooden furniture."
+  agent: vision_analyst
+
+find_venues:
+  description: >
+    Use the vibe description from the previous task to generate a search query
+    that finds bars or restaurants in {city} with a similar atmosphere. Pass
+    the query to the search tool and return the top results with names, links,
+    and snippets.
+  expected_output: >
+    A JSON list of candidate venues, each with:
+    - name
+    - link
+    - snippet
+  agent: venue_finder
+
+package_results:
+  description: >
+    Take the candidate venues returned by the Venue Finder and format the top
+    results into a user-friendly recommendation list for {city}. Include the
+    venue name, link, and a short explanation of why it matches the vibe.
+  expected_output: >
+    A formatted list of 3–5 recommendations, each with:
+    - Venue name
+    - Link
+    - 1–2 sentence explanation of why it matches the uploaded photo's vibe
+  agent: recommender
